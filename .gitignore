@@ -9,4 +9,4 @@
 .env.production.local
 .env
 
-/.vscode
+.vscode
