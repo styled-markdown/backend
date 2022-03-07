@@ -16,7 +16,7 @@ const UserSchema = new Schema({
   docs: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Docs",
+      ref: "Doc",
     },
   ],
 });

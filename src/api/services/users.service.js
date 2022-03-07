@@ -16,3 +16,8 @@ exports.createUser = async (userData) => {
     docs: [],
   });
 };
+
+exports.findUser = async (email) => {
+  const user = await User.findOne({ email }, "_id").lean();
+  return user ? user : null;
+};
