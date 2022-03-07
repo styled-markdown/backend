@@ -8,11 +8,11 @@ exports.isUserUnique = async (userData) => {
 };
 
 exports.createUser = async (userData) => {
-  const { email, displayedName } = userData;
+  const { email, displayName } = userData;
 
   await User.create({
     email,
-    userName: displayedName,
+    userName: displayName,
     docs: [],
   });
 };
