@@ -21,3 +21,15 @@ exports.join = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.getDocs = async (req, res, next) => {
+  try {
+    const docs = await usersService.getUserDocs(res.locals.user);
+    res.json({
+      result: "ok",
+      docs: docs,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
