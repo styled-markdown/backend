@@ -11,3 +11,10 @@ exports.createDoc = async ({ title, createdBy }) => {
 
   return result._id;
 };
+
+exports.getDocDetail = async (id) => {
+  const result = await Doc.findById(id, "body createdBy -_id")
+    .lean()
+    .populate("createdBy", "email -_id");
+  return result;
+};

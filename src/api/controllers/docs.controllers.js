@@ -26,3 +26,26 @@ exports.createDoc = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.getDetail = async (req, res, next) => {
+  const userEmail = res.locals.user;
+  const docId = req.params.id;
+
+  try {
+    const { body, createdBy } = await docsService.getDocDetail(docId);
+
+    if (createdBy.email === userEmail) {
+      return res.json({
+        result: "ok",
+        body,
+      });
+    }
+
+    res.json({
+      result: "error",
+      error: "Unauthorized User",
+    });
+  } catch (error) {
+    next(error);
+  }
+};

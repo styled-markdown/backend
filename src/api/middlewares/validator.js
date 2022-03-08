@@ -1,5 +1,6 @@
 const { isEmail } = require("validator");
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
 
 exports.verifyEmail = (req, res, next) => {
   const userEmail = req.body.email;
@@ -43,5 +44,19 @@ exports.verifyAccessToken = (req, res, next) => {
   }
 
   res.locals.user = decoded;
+  next();
+};
+
+exports.verifyParams = (req, res, next) => {
+  const { id } = req.params;
+
+  if (!mongoose.isValidObjectId(id)) {
+    res.status(400);
+    return res.json({
+      result: "error",
+      message: "Invalid Id",
+    });
+  }
+
   next();
 };
