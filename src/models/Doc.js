@@ -11,6 +11,11 @@ const DocSchema = new Schema(
       type: String,
       default: "",
     },
+    summary: {
+      type: String,
+      default: "",
+      maxlength: 500,
+    },
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: "User",
