@@ -32,12 +32,53 @@ exports.getDetail = async (req, res, next) => {
   const docId = req.params.id;
 
   try {
-    const { body, createdBy } = await docsService.getDocDetail(docId);
+    const result = await docsService.getDocDetail(docId);
+
+    if (!result) {
+      return res.json({
+        result: "error",
+        error: "No such document",
+      });
+    }
+
+    const { body, createdBy } = result;
 
     if (createdBy.email === userEmail) {
       return res.json({
         result: "ok",
         body,
+      });
+    }
+
+    res.json({
+      result: "error",
+      error: "Unauthorized User",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.saveDoc = async (req, res, next) => {
+  const userEmail = res.locals.user;
+  const docId = req.params.id;
+  const { body } = req.body;
+  const summary = body.slice(0, 500);
+
+  try {
+    const result = await docsService.getDocDetail(docId);
+
+    if (!result) {
+      return res.json({
+        result: "error",
+        error: "No such document",
+      });
+    }
+
+    if (result.createdBy.email === userEmail) {
+      await docsService.saveDoc({ id: docId, body, summary });
+      return res.json({
+        result: "ok",
       });
     }
 

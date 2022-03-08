@@ -11,5 +11,11 @@ router.get(
   validator.verifyParams,
   docsController.getDetail
 );
+router.put(
+  "/:id",
+  validator.verifyAccessToken,
+  validator.verifyParams,
+  docsController.saveDoc
+);
 
 module.exports = router;
