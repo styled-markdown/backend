@@ -18,3 +18,7 @@ exports.getDocDetail = async (id) => {
     .populate("createdBy", "email -_id");
   return result;
 };
+
+exports.saveDoc = async ({ id, body, summary }) => {
+  await Doc.findByIdAndUpdate(id, { body, summary });
+};
