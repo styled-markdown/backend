@@ -9,6 +9,7 @@ exports.createDoc = async (req, res, next) => {
     const userId = await usersService.findUser(userEmail);
 
     if (!userId) {
+      res.status(401);
       return res.json({
         result: "error",
         error: "Invalid User",
@@ -35,6 +36,7 @@ exports.getDetail = async (req, res, next) => {
     const result = await docsService.getDocDetail(docId);
 
     if (!result) {
+      res.status(404);
       return res.json({
         result: "error",
         error: "No such document",
@@ -50,6 +52,7 @@ exports.getDetail = async (req, res, next) => {
       });
     }
 
+    res.status(401);
     res.json({
       result: "error",
       error: "Unauthorized User",
@@ -69,6 +72,7 @@ exports.saveDoc = async (req, res, next) => {
     const result = await docsService.getDocDetail(docId);
 
     if (!result) {
+      res.status(404);
       return res.json({
         result: "error",
         error: "No such document",
@@ -82,6 +86,7 @@ exports.saveDoc = async (req, res, next) => {
       });
     }
 
+    res.status(401);
     res.json({
       result: "error",
       error: "Unauthorized User",
