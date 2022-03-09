@@ -66,7 +66,7 @@ exports.saveDoc = async (req, res, next) => {
   const userEmail = res.locals.user;
   const docId = req.params.id;
   const { body } = req.body;
-  const summary = body.slice(0, 500);
+  const summary = body?.slice(0, 500);
 
   try {
     const result = await docsService.getDocDetail(docId);
