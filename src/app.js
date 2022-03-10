@@ -33,10 +33,10 @@ app.use(
   })
 );
 
+app.use("/api", api);
 app.use("/", (req, res, next) => {
   res.json("ok");
 });
-app.use("/api", api);
 
 app.use((req, res, next) => {
   next(createError(404));
