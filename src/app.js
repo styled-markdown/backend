@@ -33,6 +33,9 @@ app.use(
   })
 );
 
+app.use("/", (req, res, next) => {
+  res.json("ok");
+});
 app.use("/api", api);
 
 app.use((req, res, next) => {
