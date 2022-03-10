@@ -17,5 +17,11 @@ router.put(
   validator.verifyParams,
   docsController.saveDoc
 );
+router.delete(
+  "/:id",
+  validator.verifyAccessToken,
+  validator.verifyParams,
+  docsController.deleteDoc
+);
 
 module.exports = router;

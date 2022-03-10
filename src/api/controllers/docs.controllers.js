@@ -95,3 +95,35 @@ exports.saveDoc = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.deleteDoc = async (req, res, next) => {
+  const userEmail = res.locals.user;
+  const docId = req.params.id;
+
+  try {
+    const result = await docsService.getDocDetail(docId);
+
+    if (!result) {
+      res.status(404);
+      return res.json({
+        result: "error",
+        error: "No such document",
+      });
+    }
+
+    if (result.createdBy.email === userEmail) {
+      await docsService.deleteDoc({ email: userEmail, id: docId });
+      return res.json({
+        result: "ok",
+      });
+    }
+
+    res.status(401);
+    res.json({
+      result: "error",
+      error: "Unauthorized User",
+    });
+  } catch (error) {
+    next(error);
+  }
+};

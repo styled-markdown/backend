@@ -22,3 +22,8 @@ exports.getDocDetail = async (id) => {
 exports.saveDoc = async ({ id, body, summary }) => {
   await Doc.findByIdAndUpdate(id, { body, summary });
 };
+
+exports.deleteDoc = async ({ email, id }) => {
+  await User.findOneAndUpdate({ email }, { $pull: { docs: id } });
+  await Doc.findByIdAndRemove(id);
+};
