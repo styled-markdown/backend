@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "test": "mocha ./spec/* --exit"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -18,10 +19,14 @@
     "validator": "^13.7.0"
   },
   "devDependencies": {
+    "chai": "^4.3.6",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "mocha": "^9.2.2",
+    "node-mocks-http": "^1.11.0",
     "nodemon": "^2.0.15",
-    "prettier": "2.5.1"
+    "prettier": "2.5.1",
+    "supertest": "^6.2.2"
   }
 }
