@@ -16,6 +16,7 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", console.log.bind(console, "Connected to database.."));
 
+const indexRouter = require("./indexRouter");
 const api = require("./api");
 
 const app = express();
@@ -33,10 +34,8 @@ app.use(
   })
 );
 
+app.use("/", indexRouter);
 app.use("/api", api);
-app.use("/", (req, res, next) => {
-  res.json("ok");
-});
 
 app.use((req, res, next) => {
   next(createError(404));
